@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team5.mapper.UserInfoMapper">
+	<select id="selectUserInfos" resultType="com.team5.vo.UserInfoVO">
+		SELECT * FROM user_info
+	</select>
+	
+	<select id="selectUserInfo" resultType="com.team5.vo.UserInfoVO">
+		SELECT * FROM user_info WHERE UI_NUM=#{uiNum}
+	</select>
+	
+	<insert id="insertUserInfo">
+		INSERT INTO user_info(UI_NAME, UI_ID, UI_PWD, UI_DESC, CREDAT, CRETIM, LMODAT, LMOTIM)
+		VALUES(#{uiName},#{uiId},#{uiPwd},#{uiDesc}, DATE_FORMAT(NOW(),'%Y%m%d'),  DATE_FORMAT(NOW(),'%H%i%s'), DATE_FORMAT(NOW(),'%Y%m%d'),  DATE_FORMAT(NOW(),'%H%i%s'));
+	</insert>
+
+	<update id="updateUserInfo">
+		UPDATE user_info SET UI_NAME=#{uiName}, UI_ID=#{uiId}, UI_PWD=#{uiPwd}, UI_DESC=#{uiDesc}, LMODAT=DATE_FORMAT(NOW(),'%Y%m%d'), LMOTIM=DATE_FORMAT(NOW(),'%H%i%s') WHERE UI_NUM=#{uiNum};
+	</update>
+	
+	<delete id="deleteUserInfo">
+		DELETE FROM user_info WHERE UI_NUM=#{uiNum};
+	</delete> 
+
+</mapper>
